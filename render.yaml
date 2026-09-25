@@ -1,0 +1,36 @@
+# Render Blueprint for the Weather Wiz API (free web service).
+# Dashboard -> New -> Blueprint -> pick this repo. Then set MONGODB_URI.
+services:
+  - type: web
+    name: weather-wiz-api
+    runtime: node
+    plan: free
+    region: singapore
+    branch: master
+    buildCommand: npm ci --include=dev && npm run build -w server
+    startCommand: node server/dist/index.js
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: '20'
+      - key: MONGODB_URI
+        sync: false # paste the MongoDB Atlas connection string in the dashboard
+      - key: JWT_ACCESS_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://harsh3851.github.io
+      # The client (github.io) and API (onrender.com) are different sites,
+      # so the refresh cookie must be SameSite=None; Secure.
+      - key: COOKIE_SAMESITE
+        value: none
+      - key: COOKIE_SECURE
+        value: 'true'
+      - key: TRUST_PROXY
+        value: '1'
+      - key: LOG_LEVEL
+        value: info
