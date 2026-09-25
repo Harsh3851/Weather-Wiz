@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Builds (the GitHub Pages output at the repo root IS committed)
+server/dist/
+client/dist/
+*.tsbuildinfo
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Caches and logs
+.vite/
+.eslintcache
+coverage/
+*.log
+npm-debug.log*
+.DS_Store
+!client/.env.development
+!client/.env.demo
+!client/.env.pages

@@ -1,0 +1,43 @@
+{
+  "name": "weather-wiz",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Weather Wiz: a MERN weather dashboard powered by Open-Meteo with a caching Node.js API.",
+  "license": "MIT",
+  "author": "Harsh Shukla",
+  "type": "module",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm run dev -w server",
+    "dev:client": "npm run dev -w client",
+    "dev:demo": "npm run dev -w client -- --mode demo",
+    "build": "npm run build -w server && npm run build -w client",
+    "build:pages": "node scripts/build-pages.mjs",
+    "start": "npm run start -w server",
+    "test": "npm run test -w shared && npm run test -w server && npm run test -w client",
+    "typecheck": "npm run typecheck -w shared && npm run typecheck -w server && npm run typecheck -w client",
+    "lint": "eslint . --max-warnings=0 && prettier --check . && npm run typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "concurrently": "^9.2.0",
+    "eslint": "^9.39.0",
+    "eslint-config-prettier": "^10.1.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.0.0",
+    "prettier": "^3.6.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.0"
+  }
+}

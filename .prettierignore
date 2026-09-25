@@ -1,0 +1,8 @@
+node_modules
+dist
+coverage
+/assets
+/index.html
+/.nojekyll
+package-lock.json
+docs/*.png
