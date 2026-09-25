@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Weather Wiz: live weather, hourly and 14-day forecasts, air quality and alerts, powered by Open-Meteo."
+    />
+    <meta name="theme-color" content="#0b1220" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <title>Weather Wiz</title>
+    <script>
+      // Apply the saved theme before first paint to avoid a flash.
+      (function () {
+        try {
+          var p = JSON.parse(localStorage.getItem('ww:preferences') || '{}').theme || 'system';
+          var dark =
+            p === 'dark' || (p === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>Weather Wiz needs JavaScript enabled.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
